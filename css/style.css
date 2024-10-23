@@ -1,0 +1,114 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: hsl(0, 0%, 95%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5em;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1em;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#select {
+  display: flex;
+  justify-content: end;
+  gap: 0.5em;
+}
+
+#select .item {
+  box-shadow: none;
+}
+
+a {
+  color: hsl(220, 95%, 68%);
+  width: max-content;
+  width: fit-content;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25em 0.5em;
+}
+
+a:not(.button):hover {
+  color: hsl(220, 87%, 74%);
+}
+
+a:not(.button):is(:focus-visible, :active) {
+  color: hsl(220, 92%, 86%);
+}
+
+:is(button, .button) {
+  background: hsl(220, 70%, 35%);
+  border: solid 0.1em hsla(0, 0%, 100%, 0.3);
+  border-radius: 0.25em;
+  cursor: pointer;
+  transition: 0.2s transform;
+  font-size: 1rem;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: hsl(0, 0%, 95%);
+}
+
+:is(button, .button):hover {
+  background: hsl(220, 75%, 40%);
+  border: solid 0.1em hsla(0, 0%, 100%, 0.4);
+  transform: scale(0.99);
+}
+
+:is(button, .button):is(:focus-visible, :active) {
+  background: hsl(220, 80%, 50%);
+  border: solid 0.1em hsla(0, 0%, 100%, 0.5);
+}
+
+:is(button, .button):active {
+  transform: scale(0.9);
+}
+
+.toanimate {
+  opacity: 0;
+  transform: translateY(1em) scale(0.3);
+}
+
+.animate {
+  transform: 50% 100%;
+  animation: 1s animateIn cubic-bezier(0.1, 1.25, 0.5, 1);
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2em) scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+img {
+  image-rendering: pixelated;
+}

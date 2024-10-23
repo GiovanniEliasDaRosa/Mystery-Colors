@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mystery Colors</title>
+
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/game.css" />
+
+    <script src="js/functions.js"></script>
+    <script src="js/router.js" defer="true"></script>
+    <script src="js/main.js" defer="true"></script>
+  </head>
+  <body>
+    <main>
+      <div id="menu">
+        <div id="menu__header">
+          <img src="img/icon.png" alt="Icon" />
+          <h1>Mystery Colors</h1>
+        </div>
+        <p>
+          A game that tests your color-guessing skills. You have 10 attempts to guess a secret
+          password made up of 4 unique colors chosen from a palette of 6 vibrant colors.
+        </p>
+        <a class="button" href="#game" id="gameLink">Play</a>
+      </div>
+      <div id="game" style="display: none" aria-disabled="true" disabled="true">
+        <a class="button" href="#menu">Menu</a>
+        <div id="board"></div>
+
+        <div id="select">
+          <div class="item red" data-color="red" draggable="true"></div>
+          <div class="item green" data-color="green" draggable="true"></div>
+          <div class="item blue" data-color="blue" draggable="true"></div>
+          <div class="item yellow" data-color="yellow" draggable="true"></div>
+          <div class="item pink" data-color="pink" draggable="true"></div>
+          <div class="item orange" data-color="orange" draggable="true"></div>
+        </div>
+
+        <button id="next">Next</button>
+      </div>
+    </main>
+
+    <div
+      class="item red"
+      data-preview-drag="true"
+      data-color="red"
+      style="display: none"
+      aria-disabled="true"
+      disabled="true"
+    ></div>
+  </body>
+</html>

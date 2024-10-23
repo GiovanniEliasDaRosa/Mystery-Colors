@@ -1,0 +1,20 @@
+#menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 80ch;
+}
+
+#menu__header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#menu__header img {
+  height: 2em;
+}
+
+#menu__header h1 {
+  margin-bottom: 0;
+}
