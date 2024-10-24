@@ -31,6 +31,7 @@ function UpdateScreen() {
   } else if (hash == "game") {
     disable(menu);
     enable(game);
+    generateMap();
   } else {
     goToMenu();
     return;

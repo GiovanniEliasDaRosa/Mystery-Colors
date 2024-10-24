@@ -8,12 +8,14 @@
     <link rel="shortcut icon" href="img/icon.png" type="image/x-icon" />
 
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/icons.css" />
     <link rel="stylesheet" href="css/menu.css" />
     <link rel="stylesheet" href="css/game.css" />
 
     <script src="js/functions.js"></script>
-    <script src="js/router.js" defer="true"></script>
     <script src="js/main.js" defer="true"></script>
+
+    <script src="js/router.js" defer="true"></script>
   </head>
   <body>
     <main>
@@ -26,10 +28,24 @@
           A game that tests your color-guessing skills. You have 10 attempts to guess a secret
           password made up of 4 unique colors chosen from a palette of 6 vibrant colors.
         </p>
-        <a class="button" href="#game" id="gameLink">Play</a>
+
+        <h2>Game Rules</h2>
+
+        <ul>
+          <li>You have <strong>10 tries</strong> to guess the correct password.</li>
+          <li>The password consists of <strong>4 unique colors</strong>.</li>
+          <li id="game__rules__colors">
+            You can choose from the following <strong>6 colors</strong>:
+            <span class="red">Red</span>, <span class="green">Green</span>,
+            <span class="blue">Blue</span>, <span class="orange">Orange</span>,
+            <span class="pink">Pink</span>, <span class="yellow">Yellow</span>
+          </li>
+        </ul>
+
+        <a class="button icons play" href="#game" id="gameLink">Play</a>
       </div>
       <div id="game" style="display: none" aria-disabled="true" disabled="true">
-        <a class="button" href="#menu">Menu</a>
+        <a class="button icons bars" href="#menu">Menu</a>
         <div id="board"></div>
 
         <div id="select">
@@ -41,7 +57,7 @@
           <div class="item orange" data-color="orange" draggable="true"></div>
         </div>
 
-        <button id="next">Next</button>
+        <button class="icons forward" id="next">Next</button>
       </div>
     </main>
 

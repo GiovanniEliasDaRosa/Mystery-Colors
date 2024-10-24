@@ -19,6 +19,11 @@ h6 {
   margin-bottom: 0.5em;
 }
 
+ul,
+ol {
+  margin-left: 1em;
+}
+
 body {
   display: grid;
   justify-content: center;
@@ -31,6 +36,10 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1em;
+}
+
+[disabled='true']{
+  opacity: 0.5;
 }
 
 #select {
@@ -95,9 +104,24 @@ a:not(.button):is(:focus-visible, :active) {
 
 .animate {
   transform: 50% 100%;
-  animation: 1s animateIn cubic-bezier(0.1, 1.25, 0.5, 1);
+  /* animation: 1s animateIn cubic-bezier(0.1, 1.25, 0.5, 1); */
+  animation: 1.5s headerAppear cubic-bezier(0.2, 0.8, 0.5, 1.3) forwards;
 }
 
+@keyframes headerAppear {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.8);
+    clip-path: circle(0% at 1em 50%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    clip-path: circle(200% at 1em 50%);
+  }
+}
+
+/* 
 @keyframes animateIn {
   0% {
     opacity: 0;
@@ -107,7 +131,7 @@ a:not(.button):is(:focus-visible, :active) {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-}
+} */
 
 img {
   image-rendering: pixelated;

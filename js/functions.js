@@ -15,3 +15,25 @@ function disable(element, hide = true) {
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+function animate(element, typePin = false) {
+  element.classList.add("willDropPin");
+  setTimeout(() => {
+    if (typePin) {
+      element.classList.add("droppedPin");
+    } else {
+      element.classList.add("dropped");
+    }
+    element.classList.remove("willDropPin");
+    setTimeout(() => {
+      if (typePin) {
+        element.classList.remove("droppedPin");
+      } else {
+        element.classList.remove("dropped");
+      }
+    }, 1000);
+  }, 10 * delay + 100);
+
+  delay += delayIncrement;
+  delayIncrement -= delayIncrement * 0.01;
+}

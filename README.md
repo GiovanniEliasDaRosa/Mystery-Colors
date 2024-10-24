@@ -2,6 +2,8 @@
 
 ## Description
 
+[![Cover Image](https://raw.githubusercontent.com/GiovanniEliasDaRosa/Mystery-Colors/main/MysteryColors_Card.png)](https://giovannieliasdarosa.github.io/Mystery-Colors)
+
 [Click here to play](https://giovannieliasdarosa.github.io/Mystery-Colors)
 
 Welcome to the **Password Game!** Inspired by the classic 80's game "Grow," this fun and challenging game tests your color-guessing skills. You have **10 attempts** to guess a secret password made up of **4 unique colors** chosen from a palette of **6 vibrant colors**.

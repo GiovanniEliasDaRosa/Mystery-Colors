@@ -15,6 +15,16 @@
   height: 2em;
 }
 
-#menu__header h1 {
+#menu :is(h1, h2, h3, h4, h5, h6) {
   margin-bottom: 0;
+}
+
+#game__rules__colors span {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+}
+
+#game__rules__colors span:is(.green, .orange, .pink, .yellow) {
+  color: black;
 }

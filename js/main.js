@@ -14,40 +14,55 @@ let delay = 0;
 let delayIncrement = 10;
 let gameOver = false;
 let savedDrop = null;
-
+let startedGame = false;
+let dragging = false;
 function generateMap() {
-  for (let i = 0; i < trys; i++) {
-    board.innerHTML += `
-    <div class="row toanimate" data-id="${i}">
-      <div class="corrects">
-        <div class="pin"></div>
-        <div class="pin"></div>
-        <div class="pin"></div>
-        <div class="pin"></div>
-      </div>
-      <div class="item" draggable="true"></div>
-      <div class="item" draggable="true"></div>
-      <div class="item" draggable="true"></div>
-      <div class="item" draggable="true"></div>
-    </div>`;
+  dragging = false;
+
+  if (!startedGame) {
+    board.innerHTML = "";
+
+    generateRandomPassword();
+    console.log(JSON.stringify(randomPassword));
+
+    for (let i = 0; i < trys; i++) {
+      board.innerHTML += `
+      <div class="row toanimate" data-id="${i}">
+        <div class="corrects">
+          <div class="pin"></div>
+          <div class="pin"></div>
+          <div class="pin"></div>
+          <div class="pin"></div>
+        </div>
+        <div class="item" draggable="true"></div>
+        <div class="item" draggable="true"></div>
+        <div class="item" draggable="true"></div>
+        <div class="item" draggable="true"></div>
+      </div>`;
+    }
   }
 
   rows = Array.from(document.querySelectorAll(".row"));
   items = Array.from(document.querySelectorAll(".item"));
 
+  if (!startedGame) {
+    updateCurrentLine();
+  }
+
   for (let i = 0; i < rows.length; i++) {
     const current = rows[i];
+    current.classList.add("toanimate");
     setTimeout(() => {
       current.classList.remove("toanimate");
       current.classList.add("animate");
       setTimeout(() => {
         current.classList.remove("animate");
-      }, 1000);
+      }, 1500);
     }, 100 * i);
   }
-}
 
-generateMap();
+  startedGame = true;
+}
 
 function generateRandomPassword() {
   let possibles = Array.from(colors);
@@ -59,9 +74,6 @@ function generateRandomPassword() {
   }
 }
 
-generateRandomPassword();
-console.log(JSON.stringify(randomPassword));
-
 function updateCurrentLine() {
   rows.forEach((row) => {
     if (row.dataset.id == currentLine) {
@@ -72,12 +84,27 @@ function updateCurrentLine() {
   });
 }
 
-updateCurrentLine();
-let dragging = false;
-
 let start = {
   x: -1,
   y: -1,
+};
+
+window.oncontextmenu = (e) => {
+  e.preventDefault();
+  let target = e.originalTarget || e.srcElement;
+  if (target.classList[0] != "item") {
+    return;
+  }
+  if (target.classList[1] == null) {
+    return;
+  }
+  if (target.classList.contains("inactive")) {
+    enable(target);
+    target.classList.remove("inactive");
+  } else {
+    disable(target, false);
+    target.classList.add("inactive");
+  }
 };
 
 window.ondragstart = (e) => {
@@ -287,7 +314,7 @@ next.onclick = () => {
       alert("You lost");
 
       board.innerHTML += `
-        <h2 id="correctPasswordH1">The Password was:</h2>
+        <h2 id="correctPasswordH1">Correct:</h2>
         <div class="row toanimate" data-id="null">
           <div class="corrects">
             <div class="pin"></div>
@@ -311,25 +338,3 @@ next.onclick = () => {
     }, 500);
   }
 };
-
-function animate(element, typePin = false) {
-  element.classList.add("willDropPin");
-  setTimeout(() => {
-    if (typePin) {
-      element.classList.add("droppedPin");
-    } else {
-      element.classList.add("dropped");
-    }
-    element.classList.remove("willDropPin");
-    setTimeout(() => {
-      if (typePin) {
-        element.classList.remove("droppedPin");
-      } else {
-        element.classList.remove("dropped");
-      }
-    }, 1000);
-  }, 10 * delay + 100);
-
-  delay += delayIncrement;
-  delayIncrement -= delayIncrement * 0.01;
-}
