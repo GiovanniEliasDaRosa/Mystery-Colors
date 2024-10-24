@@ -1,13 +1,13 @@
 @font-face {
   font-family: "FontAwesome900";
-  src: url("/fonts/fa-solid-900.ttf") format("truetype");
+  src: url("../fonts/fa-solid-900.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: "FontAwesome400";
-  src: url("/fonts/fa-regular-400.ttf") format("truetype");
+  src: url("../fonts/fa-regular-400.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
