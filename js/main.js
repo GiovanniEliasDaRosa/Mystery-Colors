@@ -128,17 +128,23 @@ window.ondragstart = (e) => {
     y: bound.y - e.clientY,
   };
 
-  target.classList.add("dragging");
-  dragging = true;
-  enable(previewDrag);
-
   let color = target.dataset.color;
 
   previewDrag.classList = `item ${color}`;
   previewDrag.setAttribute("data-color", color);
+  enable(previewDrag);
+
+  dragging = true;
+  target.classList.add("willDrag");
+
+  setTimeout(() => {
+    target.classList.add("dragging");
+    target.classList.remove("willDrag");
+  }, 1);
 };
 
 window.ondragover = (e) => {
+  console.log("drag");
   let dropX = e.clientX;
   let dropY = e.clientY;
 
@@ -169,6 +175,8 @@ window.ondragend = (e) => {
   let element = document.elementFromPoint(dropX, dropY);
   dragging = false;
   target.classList.remove("dragging");
+  target.classList.remove("willDrag");
+
   x = -64;
   y = -64;
   previewDrag.style.left = "-100px";
