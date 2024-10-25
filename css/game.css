@@ -167,3 +167,57 @@
   border-top: solid 0.125em hsla(0, 0%, 100%, 0.8);
   margin-top: 0.25em;
 }
+
+#gameOver {
+  position: fixed;
+  inset: 0;
+  background: hsla(0, 0%, 0%, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(0.2em);
+  animation: 1s gameOverAppear ease-out;
+}
+
+#gameOver.willDissapear {
+  animation: 1s gameOverDisappear ease-out;
+  opacity: 0;
+  background: hsla(0, 0%, 0%, 0);
+  backdrop-filter: blur(0);
+}
+
+#gameOver[data-won="true"] h1 {
+  color: hsl(150, 70%, 60%);
+  text-shadow: 0.05em 0.05em 0 hsl(150, 70%, 30%);
+}
+
+#gameOver[data-won="false"] h1 {
+  color: hsl(0, 70%, 60%);
+  text-shadow: 0.05em 0.05em 0 hsl(0, 70%, 30%);
+}
+
+@keyframes gameOverAppear {
+  0% {
+    opacity: 0;
+    background: hsla(0, 0%, 0%, 0.1);
+    backdrop-filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    background: hsla(0, 0%, 0%, 0.5);
+    backdrop-filter: blur(0.2em);
+  }
+}
+
+@keyframes gameOverDisappear {
+  0% {
+    opacity: 1;
+    background: hsla(0, 0%, 0%, 0.5);
+    backdrop-filter: blur(0.2em);
+  }
+  100% {
+    opacity: 0;
+    background: hsla(0, 0%, 0%, 0.1);
+    backdrop-filter: blur(0);
+  }
+}

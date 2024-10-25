@@ -5,12 +5,12 @@ let hash = "";
 window.addEventListener(
   "hashchange",
   () => {
-    UpdateScreen();
+    updateScreen();
   },
   false
 );
 
-function UpdateScreen() {
+function updateScreen() {
   updates = 0;
   let loadedhash = window.location.hash;
   if (loadedhash == "" || loadedhash == "#") {
@@ -39,6 +39,9 @@ function UpdateScreen() {
 }
 
 function goToMenu() {
+  clearInterval(repeatStepInterval);
+  disable(helpTutorial);
+
   enable(menu);
   disable(game);
   window.location.hash = "";
@@ -48,4 +51,4 @@ if (window.location.hash != "") {
   hash = window.location.hash.replace("#", "");
 }
 
-UpdateScreen();
+updateScreen();

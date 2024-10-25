@@ -49,10 +49,30 @@
   content: "\f04b";
 }
 
-.icons.bars::before {
-  content: "\f0c9";
+.icons.home::before {
+  content: "\f015";
 }
 
 .icons.forward::before {
   content: "\f04e";
+}
+
+.icons.arrow-pointer::before {
+  content: "\f245";
+}
+
+.icons[data-current-icon="hand-pointer"]::before {
+  content: "\f25a";
+}
+
+.icons[data-current-icon="hand"]::before {
+  content: "\f256";
+}
+
+.icons[data-current-icon="grab"]::before {
+  content: "\f255";
+}
+
+.icons[data-current-icon="wait"]::before {
+  content: "\f251";
 }

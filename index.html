@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="css/icons.css" />
     <link rel="stylesheet" href="css/menu.css" />
     <link rel="stylesheet" href="css/game.css" />
+    <link rel="stylesheet" href="css/tutorial.css" />
 
     <script src="js/functions.js"></script>
     <script src="js/main.js" defer="true"></script>
+    <script src="js/tutorial.js" defer="true"></script>
 
     <script src="js/router.js" defer="true"></script>
   </head>
@@ -42,10 +44,10 @@
           </li>
         </ul>
 
-        <a class="button icons play" href="#game" id="gameLink">Play</a>
+        <a class="button bigger icons play" href="#game" id="gameLink">Play</a>
       </div>
       <div id="game" style="display: none" aria-disabled="true" disabled="true">
-        <a class="button icons bars" href="#menu">Menu</a>
+        <a class="button bigger icons home" href="#menu">Menu</a>
         <div id="board"></div>
 
         <div id="select">
@@ -58,16 +60,32 @@
         </div>
 
         <button class="icons forward" id="next">Next</button>
+
+        <div
+          class="item red"
+          data-preview-drag="true"
+          data-color="red"
+          style="display: none"
+          aria-disabled="true"
+          disabled="true"
+        ></div>
+
+        <div id="helpTutorial" class="icons nomargin arrow-pointer"></div>
+        <div id="tutorial">
+          <h2 id="tutorial__title">Verify</h2>
+          <p id="tutorial__description">
+            <strong>White</strong>: Some color is
+            <strong>correct but in the wrong place</strong>.<br />
+            <strong>Black</strong>: Some color is
+            <strong>correct and in the right place</strong>.<br />
+            <strong>Empty</strong>: Some color is <strong>not in the password</strong>.
+          </p>
+        </div>
+
+        <div id="gameOver" style="display: none" aria-disabled="true" disabled="true">
+          <h1>You won!</h1>
+        </div>
       </div>
     </main>
-
-    <div
-      class="item red"
-      data-preview-drag="true"
-      data-color="red"
-      style="display: none"
-      aria-disabled="true"
-      disabled="true"
-    ></div>
   </body>
 </html>

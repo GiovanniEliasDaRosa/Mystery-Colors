@@ -1,0 +1,22 @@
+#helpTutorial {
+  position: absolute;
+  top: -4em;
+  left: -4em;
+  font-size: 2rem;
+  pointer-events: none;
+  text-shadow: -0.08em -0.08em 0 black, 0 -0.08em 0 black, 0.08em -0.08em 0 black, -0.08em 0 0 black,
+    0.08em 0 0 black, -0.08em 0.08em 0 black, 0 0.08em 0 black, 0.08em 0.08em 0 black;
+}
+
+#tutorial {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 1em;
+  width: min(28em, 100vw);
+  max-width: 100%;
+  background: hsla(0, 0%, 0%, 0.2);
+  border-radius: 0 0.5em 0 0;
+  font-size: 1rem;
+  line-height: 1.5em;
+}

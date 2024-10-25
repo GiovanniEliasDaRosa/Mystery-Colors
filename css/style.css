@@ -38,7 +38,7 @@ main {
   gap: 1em;
 }
 
-[disabled='true']{
+[disabled="true"] {
   opacity: 0.5;
 }
 
@@ -68,6 +68,10 @@ a:not(.button):hover {
 
 a:not(.button):is(:focus-visible, :active) {
   color: hsl(220, 92%, 86%);
+}
+
+:is(button, .button).bigger {
+  padding: 0.5rem 1rem;
 }
 
 :is(button, .button) {

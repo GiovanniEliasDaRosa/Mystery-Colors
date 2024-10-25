@@ -3,6 +3,7 @@ let items = [];
 const board = document.querySelector("#board");
 const select = document.querySelector("#select");
 const next = document.querySelector("#next");
+const gameOverElement = document.querySelector("#gameOver");
 const previewDrag = document.querySelector("[data-preview-drag='true']");
 let currentLine = 0;
 
@@ -16,6 +17,8 @@ let gameOver = false;
 let savedDrop = null;
 let startedGame = false;
 let dragging = false;
+let won = false;
+
 function generateMap() {
   dragging = false;
 
@@ -59,6 +62,10 @@ function generateMap() {
         current.classList.remove("animate");
       }, 1500);
     }, 100 * i);
+  }
+
+  if (!sawTutorial) {
+    startTutorial();
   }
 
   startedGame = true;
@@ -109,7 +116,8 @@ window.oncontextmenu = (e) => {
 
 window.ondragstart = (e) => {
   let target = e.originalTarget || e.srcElement;
-  if (target.classList[0] != "item") {
+  if (target.classList[0] != "item" || target.classList[1] == null) {
+    e.preventDefault();
     return;
   }
 
@@ -151,6 +159,10 @@ window.ondragover = (e) => {
 
 window.ondragend = (e) => {
   let target = e.originalTarget || e.srcElement;
+  if (target.classList[0] != "item" || target.classList[1] == null) {
+    e.preventDefault();
+    return;
+  }
 
   let dropX = e.clientX;
   let dropY = e.clientY;
@@ -267,7 +279,9 @@ next.onclick = () => {
   }
 
   if (correctColorsAndPlace.length == 4) {
-    gameOver = true;
+    won = true;
+    finishGame();
+
     rows.forEach((row) => {
       row.removeAttribute("data-selected");
     });
@@ -309,9 +323,9 @@ next.onclick = () => {
   updateCurrentLine();
 
   if (currentLine == trys) {
-    gameOver = true;
     setTimeout(() => {
-      alert("You lost");
+      won = false;
+      finishGame();
 
       board.innerHTML += `
         <h2 id="correctPasswordH1">Correct:</h2>
@@ -338,3 +352,22 @@ next.onclick = () => {
     }, 500);
   }
 };
+
+function finishGame() {
+  gameOver = true;
+
+  gameOverElement.setAttribute("data-won", won);
+  if (won) {
+    gameOverElement.children[0].innerText = "You won!";
+  } else {
+    gameOverElement.children[0].innerText = "You lost!";
+  }
+
+  enable(gameOverElement);
+  setTimeout(() => {
+    gameOverElement.classList.add("willDissapear");
+    setTimeout(() => {
+      disable(gameOverElement);
+    }, 1000);
+  }, 2000);
+}
