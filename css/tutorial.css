@@ -9,11 +9,8 @@
 }
 
 #tutorial {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   padding: 1em;
-  width: min(28em, 100vw);
+  width: min(28em, 100%);
   max-width: 100%;
   background: hsla(0, 0%, 0%, 0.2);
   border-radius: 0 0.5em 0 0;

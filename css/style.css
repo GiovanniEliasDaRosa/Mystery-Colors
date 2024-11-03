@@ -26,16 +26,21 @@ ol {
 
 body {
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 1em;
+  padding: 0.5rem;
 }
 
 main {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
+  width: 100%;
 }
 
 [disabled="true"] {
@@ -45,7 +50,7 @@ main {
 #select {
   display: flex;
   justify-content: end;
-  gap: 0.5em;
+  gap: 0.5rem;
 }
 
 #select .item {

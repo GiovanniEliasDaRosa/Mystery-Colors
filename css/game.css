@@ -1,8 +1,10 @@
 #game {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
   gap: 0.5rem;
-  max-width: 80ch;
+  width: max(80ch, 100%);
+  max-width: 100%;
   font-size: 2rem;
 }
 
@@ -14,6 +16,11 @@
   user-select: none;
 }
 
+#next {
+  width: min(20em, 100%);
+  max-width: 100%;
+}
+
 .row:nth-child(1) {
   border-top: solid 0.05em hsla(0, 0%, 100%, 0.5);
 }
@@ -23,7 +30,7 @@
   border-bottom: solid 0.08em hsla(0, 0%, 100%, 0.5);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1em;
+  gap: 1rem;
   background-color: hsl(46, 7%, 45%);
 }
 
@@ -223,5 +230,18 @@
     opacity: 0;
     background: hsla(0, 0%, 0%, 0.1);
     backdrop-filter: blur(0);
+  }
+}
+
+@media (max-width: 28em) {
+  #board {
+    padding: 0.25em;
+  }
+  .row {
+    padding: 0.25em 0.5em;
+    gap: 0.5rem;
+  }
+  #select {
+    gap: 0.5rem;
   }
 }
