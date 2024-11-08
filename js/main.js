@@ -1,5 +1,6 @@
 let rows = [];
 let items = [];
+const body = document.body;
 const board = document.querySelector("#board");
 const select = document.querySelector("#select");
 const next = document.querySelector("#next");
@@ -96,6 +97,40 @@ let start = {
   y: -1,
 };
 
+if (isMobile) {
+  window.ontouchstart = (e) => {
+    console.log("ontouchstart");
+    console.log(e.changedTouches[0]);
+    dragstart(e.changedTouches[0]);
+  };
+
+  window.ontouchmove = (e) => {
+    console.log("ontouchmove");
+    let touch = e.changedTouches[0];
+    if (touch.clientY < window.innerHeight / 4) {
+      window.scrollTo(0, window.scrollY - 1);
+    }
+    dragover(touch);
+  };
+
+  window.ontouchend = (e) => {
+    console.log("ontouchend");
+    console.log(e.changedTouches[0]);
+    dragend(e.changedTouches[0]);
+  };
+} else {
+  window.ondragstart = (e) => {
+    dragstart(e);
+  };
+
+  window.ondragover = (e) => {
+    dragover(e);
+  };
+
+  window.ondragend = (e) => {
+    dragend(e);
+  };
+}
 window.oncontextmenu = (e) => {
   e.preventDefault();
   let target = e.originalTarget || e.srcElement;
@@ -112,99 +147,6 @@ window.oncontextmenu = (e) => {
     disable(target, false);
     target.classList.add("inactive");
   }
-};
-
-window.ondragstart = (e) => {
-  let target = e.originalTarget || e.srcElement;
-  if (target.classList[0] != "item" || target.classList[1] == null) {
-    e.preventDefault();
-    return;
-  }
-
-  let bound = target.getBoundingClientRect();
-
-  start = {
-    x: bound.x - e.clientX,
-    y: bound.y - e.clientY,
-  };
-
-  let color = target.dataset.color;
-
-  previewDrag.classList = `item ${color}`;
-  previewDrag.setAttribute("data-color", color);
-  enable(previewDrag);
-
-  dragging = true;
-  target.classList.add("willDrag");
-
-  setTimeout(() => {
-    target.classList.add("dragging");
-    target.classList.remove("willDrag");
-  }, 1);
-};
-
-window.ondragover = (e) => {
-  console.log("drag");
-  let dropX = e.clientX;
-  let dropY = e.clientY;
-
-  let element = document.elementFromPoint(dropX, dropY);
-
-  if (!element.classList.contains("item") || element.parentElement.dataset.id != currentLine) {
-    previewDrag.style.left = `${dropX + start.x}px`;
-    previewDrag.style.top = `${dropY + start.y}px`;
-    savedDrop = null;
-    return;
-  }
-
-  let bound = element.getBoundingClientRect();
-  previewDrag.style.left = `${bound.x}px`;
-  previewDrag.style.top = `${bound.y}px`;
-  savedDrop = element;
-};
-
-window.ondragend = (e) => {
-  let target = e.originalTarget || e.srcElement;
-  if (target.classList[0] != "item" || target.classList[1] == null) {
-    e.preventDefault();
-    return;
-  }
-
-  let dropX = e.clientX;
-  let dropY = e.clientY;
-  let element = document.elementFromPoint(dropX, dropY);
-  dragging = false;
-  target.classList.remove("dragging");
-  target.classList.remove("willDrag");
-
-  x = -64;
-  y = -64;
-  previewDrag.style.left = "-100px";
-  previewDrag.style.top = "-100px";
-  disable(previewDrag);
-  start = {
-    x: -1,
-    y: -1,
-  };
-
-  if (!element.classList.contains("item") || element.parentElement.dataset.id != currentLine) {
-    if (savedDrop == null) {
-      return;
-    } else {
-      element = savedDrop;
-    }
-  }
-
-  let color = target.dataset.color;
-
-  element.setAttribute("data-placed", "true");
-  element.classList = `item ${color}`;
-  element.classList.add("dropped");
-  element.setAttribute("data-color", color);
-
-  setTimeout(() => {
-    element.classList.remove("dropped");
-  }, 1000);
 };
 
 next.onclick = () => {
@@ -360,6 +302,101 @@ next.onclick = () => {
     }, 500);
   }
 };
+
+function dragstart(e) {
+  let target = e.originalTarget || e.srcElement || e.target;
+  if (target.classList[0] != "item" || target.classList[1] == null) {
+    e.preventDefault();
+    return;
+  }
+  body.style.overflow = "hidden";
+
+  let bound = target.getBoundingClientRect();
+
+  start = {
+    x: bound.x - e.clientX,
+    y: bound.y - e.clientY,
+  };
+
+  let color = target.dataset.color;
+
+  previewDrag.classList = `item ${color}`;
+  previewDrag.setAttribute("data-color", color);
+  enable(previewDrag);
+
+  dragging = true;
+  target.classList.add("willDrag");
+
+  setTimeout(() => {
+    target.classList.add("dragging");
+    target.classList.remove("willDrag");
+  }, 1);
+}
+
+function dragover(e) {
+  console.log("drag");
+  let dropX = e.clientX;
+  let dropY = e.clientY;
+
+  let element = document.elementFromPoint(dropX, dropY);
+
+  if (!element.classList.contains("item") || element.parentElement.dataset.id != currentLine) {
+    previewDrag.style.left = `${dropX + start.x}px`;
+    previewDrag.style.top = `${dropY + start.y}px`;
+    savedDrop = null;
+    return;
+  }
+
+  let bound = element.getBoundingClientRect();
+  previewDrag.style.left = `${bound.x}px`;
+  previewDrag.style.top = `${bound.y}px`;
+  savedDrop = element;
+}
+
+function dragend(e) {
+  body.style.overflow = "";
+  let target = e.originalTarget || e.srcElement || e.target;
+  if (target.classList[0] != "item" || target.classList[1] == null) {
+    e.preventDefault();
+    return;
+  }
+
+  let dropX = e.clientX;
+  let dropY = e.clientY;
+  let element = document.elementFromPoint(dropX, dropY);
+  dragging = false;
+  target.classList.remove("dragging");
+  target.classList.remove("willDrag");
+
+  x = -64;
+  y = -64;
+  previewDrag.style.left = "-100px";
+  previewDrag.style.top = "-100px";
+  disable(previewDrag);
+  start = {
+    x: -1,
+    y: -1,
+  };
+
+  if (!element.classList.contains("item") || element.parentElement.dataset.id != currentLine) {
+    if (savedDrop == null) {
+      return;
+    } else {
+      element = savedDrop;
+    }
+  }
+
+  let color = target.dataset.color;
+
+  element.setAttribute("data-placed", "true");
+  element.classList = `item ${color}`;
+  element.classList.add("dropped");
+  element.setAttribute("data-color", color);
+
+  setTimeout(() => {
+    element.classList.remove("dropped");
+  }, 1000);
+}
 
 function finishGame() {
   gameOver = true;

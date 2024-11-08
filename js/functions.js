@@ -1,3 +1,8 @@
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (isMobile) {
+  document.body.setAttribute("data-mobile", "true");
+}
+
 function enable(element) {
   element.removeAttribute("aria-disabled");
   element.removeAttribute("disabled");
