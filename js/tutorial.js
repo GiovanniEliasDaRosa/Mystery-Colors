@@ -98,7 +98,7 @@ function animateStep(current) {
     y: inicial.y + fontSize,
   };
   helpTutorial.style.left = `${pos.x}px`;
-  helpTutorial.style.top = `${pos.y}px`;
+  helpTutorial.style.top = `${pos.y + window.scrollY}px`;
   helpTutorial.style.transition = "0.1s ease-out";
   helpTutorial.style.transform = `scale(1)`;
   helpTutorial.setAttribute("data-current-icon", hands[0]);
@@ -115,7 +115,7 @@ function animateStep(current) {
       y: final.y + fontSize,
     };
     helpTutorial.style.left = `${pos.x}px`;
-    helpTutorial.style.top = `${pos.y}px`;
+    helpTutorial.style.top = `${pos.y + window.scrollY}px`;
     helpTutorial.setAttribute("data-current-icon", hands[1]);
 
     animationTimeout = setTimeout(() => {
