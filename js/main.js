@@ -99,23 +99,18 @@ let start = {
 
 if (isMobile) {
   window.ontouchstart = (e) => {
-    console.log("ontouchstart");
-    console.log(e.changedTouches[0]);
     dragstart(e.changedTouches[0]);
   };
 
   window.ontouchmove = (e) => {
-    console.log("ontouchmove");
-    let touch = e.changedTouches[0];
-    if (touch.clientY < window.innerHeight / 4) {
-      window.scrollTo(0, window.scrollY - 1);
-    }
-    dragover(touch);
+    dragover(e.changedTouches[0]);
   };
 
   window.ontouchend = (e) => {
-    console.log("ontouchend");
-    console.log(e.changedTouches[0]);
+    dragend(e.changedTouches[0]);
+  };
+
+  window.ontouchcancel = (e) => {
     dragend(e.changedTouches[0]);
   };
 } else {
@@ -131,6 +126,7 @@ if (isMobile) {
     dragend(e);
   };
 }
+
 window.oncontextmenu = (e) => {
   e.preventDefault();
   let target = e.originalTarget || e.srcElement;
@@ -337,19 +333,24 @@ function dragover(e) {
   console.log("drag");
   let dropX = e.clientX;
   let dropY = e.clientY;
+  if (dropY < window.innerHeight / 4) {
+    window.scrollTo(0, window.scrollY - 1);
+  } else if (dropY > (3 * window.innerHeight) / 4) {
+    window.scrollTo(0, window.scrollY + 1);
+  }
 
   let element = document.elementFromPoint(dropX, dropY);
 
   if (!element.classList.contains("item") || element.parentElement.dataset.id != currentLine) {
     previewDrag.style.left = `${dropX + start.x}px`;
-    previewDrag.style.top = `${dropY + start.y}px`;
+    previewDrag.style.top = `${dropY + start.y + window.scrollY}px`;
     savedDrop = null;
     return;
   }
 
   let bound = element.getBoundingClientRect();
   previewDrag.style.left = `${bound.x}px`;
-  previewDrag.style.top = `${bound.y}px`;
+  previewDrag.style.top = `${bound.y + window.scrollY}px`;
   savedDrop = element;
 }
 
