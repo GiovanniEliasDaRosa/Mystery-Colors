@@ -27,7 +27,6 @@ function generateMap() {
     board.innerHTML = "";
 
     generateRandomPassword();
-    console.log(JSON.stringify(randomPassword));
 
     for (let i = 0; i < trys; i++) {
       board.innerHTML += `

@@ -1,7 +1,7 @@
 #menu {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   width: min(80ch, 100%);
   max-width: 100%;
 }
@@ -20,12 +20,53 @@
   margin-bottom: 0;
 }
 
-#game__rules__colors span {
-  display: inline-block;
+#menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+#gameLink {
+  margin-top: 2rem;
+}
+
+#game__rules__colors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#game__rules__colors__span {
+  width: fit-content;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#game__rules__colors__span span {
+  display: block;
   padding: 0.25em 0.5em;
   border-radius: 0.5em;
 }
 
-#game__rules__colors span:is(.green, .orange, .pink, .yellow) {
+#game__rules__colors__span span:nth-child(1) {
+  margin-left: 0;
+}
+
+#game__rules__colors__span span:is(.green, .orange, .pink, .yellow) {
   color: black;
+}
+
+@media (max-width: 26em) {
+  #game__rules__colors__span {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+  }
+  #gameLink {
+    align-self: stretch;
+    width: 100%;
+    text-align: center;
+  }
 }

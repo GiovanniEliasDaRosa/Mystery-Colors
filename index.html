@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/game.css" />
     <link rel="stylesheet" href="css/tutorial.css" />
 
-    <script src="js/functions.js"></script>
+    <script src="js/functions.js" defer="true"></script>
     <script src="js/main.js" defer="true"></script>
     <script src="js/tutorial.js" defer="true"></script>
 
@@ -37,10 +37,12 @@
           <li>You have <strong>10 tries</strong> to guess the correct password.</li>
           <li>The password consists of <strong>4 unique colors</strong>.</li>
           <li id="game__rules__colors">
-            You can choose from the following <strong>6 colors</strong>:
-            <span class="red">Red</span>, <span class="green">Green</span>,
-            <span class="blue">Blue</span>, <span class="orange">Orange</span>,
-            <span class="pink">Pink</span>, <span class="yellow">Yellow</span>
+            You can choose from the following <strong>6 colors:</strong>
+            <span id="game__rules__colors__span">
+              <span class="red">Red</span><span class="green">Green</span>
+              <span class="blue">Blue</span><span class="orange">Orange</span>
+              <span class="pink">Pink</span><span class="yellow">Yellow</span>
+            </span>
           </li>
         </ul>
 
